@@ -6,6 +6,11 @@ import { Fragment } from "react";
 function ProductDetailPage(props) {
   const { loadedProduct } = props;
 
+//   if (!loadedProduct) {
+//     return <p>Loading...</p> // we don't need that if we put: 
+                                // fallback: "blocking" in the returned object from getStaticPaths
+//   }
+
   return (
     <Fragment>
       <h1>{loadedProduct.title}</h1>
@@ -36,10 +41,8 @@ export async function getStaticPaths() {
   return {
     paths: [
       { params: { pid: "p1" } },
-      { params: { pid: "p2" } },
-      { params: { pid: "p3" } },
     ],
-    fallback: false,
+    fallback: "blocking", // :true if we want to load a loading page on the client
   };
 }
 
